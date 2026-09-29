@@ -1,0 +1,7 @@
+* text=auto
+*.sv text eol=lf
+*.tcl text eol=lf
+*.md text eol=lf
+*.flist text eol=lf
+*.hex text eol=lf
+third_party/** -text
