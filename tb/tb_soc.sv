@@ -15,7 +15,8 @@ module tb_soc;
         .clk_i(clk), .rst_ni(rst_n), .fetch_enable_i(fetch_enable),
         .instr_req(instr_req), .instr_addr(instr_addr),
         .instr_gnt(instr_gnt), .instr_rvalid(instr_rvalid),
-        .instr_rdata(instr_rdata), .data_req(data_req)
+        .instr_rdata(instr_rdata), .data_req(data_req),
+        .gpio_in_i(16'b0), .gpio_out_o(), .bus_error_o()
     );
 
     // Simulation-only probes into the downloaded FF register-file version.

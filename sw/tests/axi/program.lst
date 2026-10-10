@@ -1,0 +1,81 @@
+1000: 000040b7 lui x1, 4
+1004: 00008093 addi x1, x1, 0
+1008: 11223137 lui x2, 70179
+100c: 34410113 addi x2, x2, 836
+1010: 0020a023 store f2 x2, 0(x1)
+1014: 0000a183 load f2 x3, 0(x1)
+1018: 12311263 branch f1 x2, x3, fail
+101c: 0aa00213 addi x4, x0, 170
+1020: 004080a3 store f0 x4, 1(x1)
+1024: 1122b2b7 lui x5, 70187
+1028: a4428293 addi x5, x5, -1468
+102c: 0000a183 load f2 x3, 0(x1)
+1030: 10519663 branch f1 x3, x5, fail
+1034: 0010c183 load f4 x3, 1(x1)
+1038: 10419263 branch f1 x3, x4, fail
+103c: faa00293 addi x5, x0, -86
+1040: 00108183 load f0 x3, 1(x1)
+1044: 0e519c63 branch f1 x3, x5, fail
+1048: 00005237 lui x4, 5
+104c: 56620213 addi x4, x4, 1382
+1050: 00409123 store f1 x4, 2(x1)
+1054: 0020d183 load f5 x3, 2(x1)
+1058: 0e419263 branch f1 x3, x4, fail
+105c: 5566b2b7 lui x5, 349803
+1060: a4428293 addi x5, x5, -1468
+1064: 0000a183 load f2 x3, 0(x1)
+1068: 0c519a63 branch f1 x3, x5, fail
+106c: 0020a2a3 store f2 x2, 5(x1)
+1070: 0050a183 load f2 x3, 5(x1)
+1074: 0c219463 branch f1 x3, x2, fail
+1078: 000012b7 lui x5, 1
+107c: 12228293 addi x5, x5, 290
+1080: 00709183 load f1 x3, 7(x1)
+1084: 0a519c63 branch f1 x3, x5, fail
+1088: 00010337 lui x6, 16
+108c: 00030313 addi x6, x6, 0
+1090: 00232223 store f2 x2, 4(x6)
+1094: 00432183 load f2 x3, 4(x6)
+1098: 000032b7 lui x5, 3
+109c: 34428293 addi x5, x5, 836
+10a0: 08519e63 branch f1 x3, x5, fail
+10a4: 0aa00213 addi x4, x0, 170
+10a8: 004302a3 store f0 x4, 5(x6)
+10ac: 00432183 load f2 x3, 4(x6)
+10b0: 0000b2b7 lui x5, 11
+10b4: a4428293 addi x5, x5, -1468
+10b8: 08519263 branch f1 x3, x5, fail
+10bc: 00032183 load f2 x3, 0(x6)
+10c0: 000062b7 lui x5, 6
+10c4: aa528293 addi x5, x5, -1371
+10c8: 06519a63 branch f1 x3, x5, fail
+10cc: 000113b7 lui x7, 17
+10d0: 00038393 addi x7, x7, 0
+10d4: 00300213 addi x4, x0, 3
+10d8: 0043a023 store f2 x4, 0(x7)
+10dc: 00010237 lui x4, 16
+10e0: fff20213 addi x4, x4, -1
+10e4: 0043a223 store f2 x4, 4(x7)
+10e8: 00100213 addi x4, x0, 1
+10ec: 0043a823 store f2 x4, 16(x7)
+10f0: 0043a623 store f2 x4, 12(x7)
+10f4: 01e00413 addi x8, x0, 30
+10f8: fff40413 addi x8,x8,-1
+10fc: fe041ee3 branch f1 x8, x0, delay
+1100: 0003a623 store f2 x0, 12(x7)
+1104: 0143a183 load f2 x3, 20(x7)
+1108: 02018a63 branch f0 x3, x0, fail
+110c: 0043a423 store f2 x4, 8(x7)
+1110: 0143a183 load f2 x3, 20(x7)
+1114: 02019463 branch f1 x3, x0, fail
+1118: 0003a423 store f2 x0, 8(x7)
+111c: 000204b7 lui x9, 32
+1120: 00048493 addi x9, x9, 0
+1124: 0004a183 load f2 x3, 0(x9)
+1128: 00019a63 branch f1 x3, x0, fail
+112c: 0024a023 store f2 x2, 0(x9)
+1130: 00100a13 addi x20, x0, 1
+1134: 1140a023 store f2 x20, 256(x1)
+1138: 0000006f jal x0,0
+113c: fff00a13 addi x20, x0, -1
+1140: 0000006f jal x0,0

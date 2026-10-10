@@ -9,13 +9,25 @@ mikrodenetleyici yarışması hazırlık projesi. Geliştirme devam ediyor.
 |---|---|
 | CV32E40P | FPU kapalı, FF register file; program belleğine bağlı |
 | 8 KB program belleği | Önceki yerel simülasyonlarda test edildi |
-| 8 KB veri RAM'i | RTL hazır, soc_top içinde bağlı; işlevsel testi bekliyor |
-| RAM/GPIO adres yönlendirici | RTL hazır; soc_top içine henüz bağlanmadı, test edilmedi |
-| GPIO | Yalnızca port iskeleti; davranış henüz yazılmadı |
-| Timer, UART, I2C, QSPI, boot ve hızlandırıcı | Henüz uygulanmadı |
+| 8 KB veri RAM'i | Tüm satırlar, byte maskeleri ve CPU erişimleri simülasyonda kontrol edildi |
+| AXI4-Lite ağı | Kanal beklemeleri, yanıt kararlılığı, hata ve reset senaryoları geçti |
+| GPIO | Yazmaçlar, byte yazmaları, giriş senkronizasyonu ve CPU erişimleri geçti |
+| Timer | Belgelenen davranış için testler geçti; şartname varsayımları docs/timer.md içinde |
+| PWM | AXI4-Lite üzerinden CV32E40P kontrolü; bağımsız ve CPU testleri, docs/pwm.md |
+| UART, I2C, QSPI, boot ve hızlandırıcı | Henüz uygulanmadı |
 
-Program belleği komut portuna, RAM veri portuna doğrudan bağlıdır. Mevcut program
-yalnızca yazmaçlarla 5 + 7 hesaplar ve döngüye girer; RAM erişimini test etmez.
+Program belleği komut portuna doğrudan bağlıdır. Veri portu OBI–AXI4-Lite köprüsü
+ve AXI4-Lite interconnect üzerinden RAM, GPIO, timer ve PWM'e ulaşır.
+Mevcut program yalnızca yazmaçlarla 5 + 7 hesaplar ve döngüye girer;
+AXI, RAM veya çevre birimi erişimini test etmez. Bunlar için ayrı
+sw/tests/axi/axi_program.hex ve tb_soc_axi vardır. Ayrıntılar docs/axi.md içindedir.
+
+48 MHz SoC saatiyle 24 kHz PWM denemesi için
+`./scripts/verify.ps1 -Tests tb_soc_pwm_24k` çalıştırın. CPU, AXI üzerinden
+%25/%50/%75 görev oranlarını ayarlar; iki açılışta 72 tam periyot ve 12 AXI
+yazması doğrulandı. Dalga kaydını Vivado'da açmak için
+`source scripts/open_soc_pwm_24k_wave.tcl` kullanın (depo kökünden).
+Ayrıntılar [PWM belgesinde](docs/pwm.md).
 
 ## Klasörler
 
@@ -38,13 +50,26 @@ vivado -mode batch -source scripts/create_project.tcl
 ```
 
 Ardından build/vivado/cv32e40p_soc.xpr dosyasını açın. Betik simülasyon veya sentez
-başlatmaz. Aynı proje zaten varsa onu açın; betik var olan projeyi zorla ezmez.
+başlatmaz. Depodaki proje zaten varsa betik onu açıp kaynak listesini günceller.
 program.hex simülasyon kaynaklarına eklenir; testbench'ler bilgisayara özel yol
 yerine program.hex adını kullanır.
 
 Test çalıştırılacağı zaman Simulation Sources üst modülü olarak tb_soc veya
-tb_imem_8kb seçilip Run Behavioral Simulation kullanılabilir. Bu aktarım sırasında
-testler yeniden çalıştırılmadı. Ayrıntılar docs/verification.md içindedir.
+tb_imem_8kb seçilip Run Behavioral Simulation kullanılabilir. Güncel regresyonun kapsamı
+ve sınırları docs/verification.md içindedir.
+
+## Doğrulama
+
+Depo kökünde PowerShell ile:
+
+```powershell
+./scripts/verify.ps1
+```
+
+Varsayılan Vivado yolu C:/Xilinx/2025.1/Vivado/bin; farklı kurulum için
+-VivadoBin parametresi verin. Tek test örneği:
+`./scripts/verify.ps1 -Tests tb_soc_axi`.
+Loglar build/verification altında oluşur.
 
 Bu bir fiziksel FPGA uygulaması değildir. Clock gate modeli simülasyon içindir;
 sentez öncesi FPGA'ya uygun saat yapısı ve constraints hazırlanmalıdır.

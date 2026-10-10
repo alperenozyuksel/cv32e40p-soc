@@ -1,0 +1,15 @@
+PASS: 11 checks; image, bounds, alignment, backpressure, reset, idle
+BOOT 1 PASS: x1=5 x2=7 x3=12; fetches=19
+BOOT 2 PASS: x1=5 x2=7 x3=12; fetches=19
+PASS: CV32E40P executed 5 + 7 = 12, looped, and restarted after reset
+PASS tb_peripherals checks=18493 seed=12ab9876
+PASS tb_axi checks=301 seed=abcdef01
+PASS tb_bridge checks=66
+PASS tb_adapter checks=65
+BOOT 0 AXI PASS grants=32 responses=32
+BOOT 1 AXI PASS grants=32 responses=32
+PASS tb_soc_axi boots=2
+PASS tb_pwm checks=3850 clock=100MHz period100=1MHz
+BOOT 0 PWM PASS periods per duty=31,30,30,30
+BOOT 1 PWM PASS periods per duty=31,30,30,30
+PASS tb_soc_pwm measured_periods=242 AXI_writes=22

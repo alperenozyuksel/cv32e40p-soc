@@ -1,0 +1,3 @@
+BOOT 0 PWM PASS periods per duty=13,12,11
+BOOT 1 PWM PASS periods per duty=13,12,11
+PASS tb_soc_pwm_24k measured_periods=72 AXI_writes=12
